@@ -4,6 +4,7 @@ import com.phamminhdao.spring_boot_rest_api.entities.Customer;
 import com.phamminhdao.spring_boot_rest_api.repositories.CustomerRepository;
 import com.phamminhdao.spring_boot_rest_api.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(@Qualifier("customerRepositoryJpaImpl") CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
