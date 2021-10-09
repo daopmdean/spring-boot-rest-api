@@ -1,6 +1,7 @@
 package com.phamminhdao.spring_boot_rest_api.services.impls;
 
 import com.phamminhdao.spring_boot_rest_api.entities.Customer;
+import com.phamminhdao.spring_boot_rest_api.repositories.CustomerRepo;
 import com.phamminhdao.spring_boot_rest_api.repositories.CustomerRepository;
 import com.phamminhdao.spring_boot_rest_api.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,37 +10,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    private CustomerRepository customerRepository;
+    private CustomerRepo customerRepo;
 
     @Autowired
-    public CustomerServiceImpl(@Qualifier("customerRepositoryJpaImpl") CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerServiceImpl(CustomerRepo customerRepo) {
+        this.customerRepo = customerRepo;
     }
 
     @Override
-    @Transactional
     public List<Customer> findAll() {
-        return customerRepository.findAll();
+        return customerRepo.findAll();
     }
 
     @Override
-    @Transactional
     public Customer findById(int id) {
-        return customerRepository.findById(id);
+        Optional<Customer> optional = customerRepo.findById(id);
+        if (!optional.isPresent()) {
+            return null;
+        }
+
+        return optional.get();
     }
 
     @Override
-    @Transactional
     public void save(Customer customer) {
-        customerRepository.save(customer);
+        customerRepo.save(customer);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        customerRepository.deleteById(id);
+        customerRepo.deleteById(id);
     }
 }

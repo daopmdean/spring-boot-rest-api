@@ -33,7 +33,6 @@ public class CustomerController {
     @GetMapping("/customers/{id}")
     public Customer getCustomer(@PathVariable int id) {
         Customer customer = customerService.findById(id);
-
         if (customer == null) {
             throw new RuntimeException("customer not found");
         }
