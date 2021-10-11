@@ -1,7 +1,6 @@
 package com.phamminhdao.spring_boot_rest_api.rest;
 
 import com.phamminhdao.spring_boot_rest_api.entities.Customer;
-import com.phamminhdao.spring_boot_rest_api.repositories.CustomerRepository;
 import com.phamminhdao.spring_boot_rest_api.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
